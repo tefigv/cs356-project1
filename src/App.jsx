@@ -3,6 +3,7 @@ import coursesData from './courseData';
 
 function App() {
   const [modalCourse, setModalCourse] = useState(null);
+  const [registeredCourses, setRegisteredCourses] = useState(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [courseLevel, setCourseLevel] = useState('All Levels');
@@ -65,6 +66,18 @@ function App() {
 
   const openModal = (course) => setModalCourse(course);
   const closeModal = () => setModalCourse(null);
+
+  const toggleRegister = (courseId) => {
+    setRegisteredCourses((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(courseId)) {
+        newSet.delete(courseId);
+      } else {
+        newSet.add(courseId);
+      }
+      return newSet;
+    });
+  };
 
   const handleSortOrderChange = (e) => {
     setSortOrder(e.target.value);
@@ -189,6 +202,9 @@ function App() {
                   <h3>
                     {course.header}
                     {course.isCore && <span className="core-badge">Core</span>}
+                    {registeredCourses.has(course.id) && (
+                    <span className="registered-badge">R</span>
+                  )}
                   </h3>
                   <h4>{course.title}</h4>
                   <span className="credits">{course.credits} credits</span>
@@ -251,6 +267,21 @@ function App() {
               <p>
                 <strong>Credits:</strong> {modalCourse.credits}
               </p>
+              {/* Show Prerequisites, defaulting to "None" if empty */}
+              <p><strong>Prerequisites:</strong> {modalCourse.prerequisites && modalCourse.prerequisites.length > 0 
+                ? modalCourse.prerequisites.join(", ") 
+                : "None"}
+              </p>
+
+              {/* Show Skills Learned if available */}
+              {modalCourse.skills && modalCourse.skills.length > 0 && (
+                <p><strong>Skills Learned:</strong> {modalCourse.skills.join(", ")}</p>
+              )}
+
+              {/* Show Delivery Method */}
+              {modalCourse.deliveryMethod && (
+                <p><strong>Delivery Method:</strong> {modalCourse.deliveryMethod.join(", ")}</p>
+              )}
               <p>
                 <strong>Semesters Offered:</strong>
               </p>
@@ -268,6 +299,12 @@ function App() {
                 ))}
               </div>
             </div>
+            <button
+              className="register-button"
+              onClick={() => toggleRegister(modalCourse.id)}
+            >
+              {registeredCourses.has(modalCourse.id) ? 'Registered' : 'Register'}
+            </button>
           </div>
         </div>
       )}
