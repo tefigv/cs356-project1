@@ -9,22 +9,21 @@ function App() {
   const [courseLevel, setCourseLevel] = useState('All Levels');
   const [creditHours, setCreditHours] = useState('All Credits');
   const [semester, setSemester] = useState('All Semesters');
+  const [requirement, setRequirement] = useState('All Requirements');
   const coursesPerPage = 10;
 
-  const [favorites, setFavorites] = useState([]);
   const [showCore, setShowCore] = useState(false);
   const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
-  const [showFavorites, setShowFavorites] = useState(false);
 
   const resetFilters = () => {
     setSearchTerm('');
     setCourseLevel('All Levels');
     setCreditHours('All Credits');
     setSemester('All Semesters');
-    setShowFavorites(false);
     setShowCore(false);
     setSortOrder('asc');
     setCurrentPage(1);
+    setRequirement('All Requirements');
   };
 
   const filteredCourses = coursesData
@@ -39,10 +38,10 @@ function App() {
       const searchMatch =
         course.header.toLowerCase().includes(searchTerm.toLowerCase()) ||
         course.title.toLowerCase().includes(searchTerm.toLowerCase());
-      const favoritesMatch = !showFavorites || favorites.includes(course.id);
       const coreMatch = !showCore || course.isCore;
+      const requirementMatch = requirement === 'All Requirements' || course.requirement.includes(requirement);
 
-      return levelMatch && creditMatch && semesterMatch && searchMatch && favoritesMatch && coreMatch;
+      return levelMatch && creditMatch && semesterMatch && searchMatch && coreMatch && requirementMatch;
     })
     .sort((a, b) => {
       const levelA = parseInt(a.header.match(/\d+/)[0]);
@@ -51,18 +50,8 @@ function App() {
     });
 
   const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
-  const displayedCourses =
-    showFavorites && favorites.length === 0
-      ? []
-      : filteredCourses.slice((currentPage - 1) * coursesPerPage, currentPage * coursesPerPage);
 
-  const toggleFavorite = (courseId) => {
-    setFavorites((currentFavorites) =>
-      currentFavorites.includes(courseId)
-        ? currentFavorites.filter((id) => id !== courseId)
-        : [...currentFavorites, courseId]
-    );
-  };
+  
 
   const openModal = (course) => setModalCourse(course);
   const closeModal = () => setModalCourse(null);
@@ -84,11 +73,21 @@ function App() {
     setCurrentPage(1);
   };
 
+  const requirements = [
+    { id: 'requirement1', label: 'Requirement 1 - Complete 17 Courses' },
+    { id: 'requirement2', label: 'Requirement 2 - Complete 4 Courses' },
+    { id: 'requirement3', label: 'Requirement 3 - Complete 1 of 2 Courses' },
+    { id: 'requirement4', label: 'Requirement 4 - Complete 1 of 3 Courses' },
+    { id: 'requirement5', label: 'Requirement 5 - Complete 2 of 11 Courses' },
+    { id: 'requirement6', label: 'Requirement 6 - Complete 1 of 38 Courses' },
+  ];
+
   return (
     <div className="app">
       <header className="site-header">
         <div className="container">
-          <h1>BYU CS Courses</h1>
+          <h1>BYU Computer Science Catalog</h1>
+          <h3>Software Engineer</h3>
           <p></p>
         </div>
       </header>
@@ -109,9 +108,11 @@ function App() {
           )}
         </div>
         <div className="filter-item">
-          <select value={sortOrder} onChange={handleSortOrderChange}>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
+          <select value={requirement} onChange={(e) => setRequirement(e.target.value)}>
+            <option value="All Requirements">All Requirements</option>
+            {requirements.map((req) => (
+              <option key={req.id} value={req.id}>{req.label}</option>
+            ))}
           </select>
         </div>
         <div className="filter-item">
@@ -145,14 +146,6 @@ function App() {
           </select>
         </div>
         <div className="filter-item checkbox">
-          <label>
-            <input
-              type="checkbox"
-              checked={showFavorites}
-              onChange={() => setShowFavorites((prev) => !prev)}
-            />
-            Favorites
-          </label>
         </div>
         <div className="filter-item checkbox">
           <label>
@@ -171,27 +164,81 @@ function App() {
         </div>
       </div>
 
-      {/* Courses Section */}
-      <main className="container">
-        <div className="pagination top-pagination">
-          <button onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
+      {/* Requirement Courses Sections */}
+{requirements
+  .filter(req => requirement === 'All Requirements' || req.id === requirement)
+  .map((req) => {
+    const requirementCourses = filteredCourses.filter(course => course.requirement && course.requirement.includes(req.id));
+    return (
+      <div className="container mt-4" key={req.id}>
+        <h3>{req.label}</h3>
+        <div className="list-group">
+          {requirementCourses.map((course) => (
+            <div
+              className="list-group-item list-group-item-action"
+              key={course.id}
+              // onClick={() => openModal(course)}
+            >
+              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse-${course.id}`} aria-expanded="false" aria-controls={`flush-collapse-${course.id}`}>
+                <div className="d-flex w-100 justify-content-between">
+                  <h5 className="mb-1">{course.header} - {course.title}</h5>
+                  <small>{course.credits} credits</small>
+                </div>
+              </button>
+              <div id={`flush-collapse-${course.id}`} className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <p className="modal-description">{course.description}</p>
+            <div className="modal-details">
+              <p>
+                <strong>Credits:</strong> {course.credits}
+              </p>
+              {/* Show Prerequisites, defaulting to "None" if empty */}
+              <p><strong>Prerequisites:</strong> {course.prerequisites && course.prerequisites.length > 0 
+                ? course.prerequisites.join(", ") 
+                : "None"}
+              </p>
 
-        <div className="courses-grid">
-          {showFavorites && favorites.length === 0 ? (
-            <div className="no-favorites">No favorites selected</div>
-          ) : (
+              {/* Show Skills Learned if available */}
+              {course.skills && course.skills.length > 0 && (
+                <p><strong>Skills Learned:</strong> {course.skills.join(", ")}</p>
+              )}
+
+              {/* Show Delivery Method */}
+              {course.deliveryMethod && (
+                <p><strong>Delivery Method:</strong> {course.deliveryMethod.join(", ")}</p>
+              )}
+              <p>
+                <strong>Semesters Offered:</strong>
+              </p>
+              <div className="modal-semesters">
+                {course.semesters.map((sem, idx) => (
+                  <span key={idx} className={`semester-badge ${sem}`}>
+                    {sem === 'F'
+                      ? 'Fall'
+                      : sem === 'W'
+                      ? 'Winter'
+                      : sem === 'SP'
+                      ? 'Spring'
+                      : 'Summer'}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <button
+              className="register-button"
+              onClick={() => toggleRegister(course.id)}
+            >
+              {registeredCourses.has(course.id) ? 'Registered' : 'Register'}
+            </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  })}
+
+        {/* <div className="courses-grid">
+          {
             displayedCourses.map((course) => (
               <div
                 className="course-card"
@@ -200,44 +247,18 @@ function App() {
               >
                 <div className="card-content">
                   <h3>
-                    {course.header}
+                    {course.header} - {course.title}
                     {course.isCore && <span className="core-badge">Core</span>}
                     {registeredCourses.has(course.id) && (
                     <span className="registered-badge">R</span>
                   )}
                   </h3>
-                  <h4>{course.title}</h4>
                   <span className="credits">{course.credits} credits</span>
                 </div>
-                <button
-                  className={`favorite-button ${favorites.includes(course.id) ? 'favorited' : ''}`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(course.id);
-                  }}
-                >
-                  {favorites.includes(course.id) ? '★' : '☆'}
-                </button>
               </div>
             ))
-          )}
-        </div>
-
-        <div className="pagination bottom-pagination">
-          <button onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>
-            Previous
-          </button>
-          <span>
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
-        </div>
-      </main>
+          }
+        </div> */}
 
       <footer className="site-footer">
         <div className="container">
@@ -256,12 +277,6 @@ function App() {
               {modalCourse.header}: {modalCourse.title}
               {modalCourse.isCore && <span className="core-badge">Core</span>}
             </h2>
-            <button
-              className={`favorite-button ${favorites.includes(modalCourse.id) ? 'favorited' : ''}`}
-              onClick={() => toggleFavorite(modalCourse.id)}
-            >
-              {favorites.includes(modalCourse.id) ? '★ Unfavorite' : '☆ Favorite'}
-            </button>
             <p className="modal-description">{modalCourse.description}</p>
             <div className="modal-details">
               <p>

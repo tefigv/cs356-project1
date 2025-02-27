@@ -1,4 +1,6 @@
 /* Color Variables & Reset */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 :root {
   --primary-color: #3a86ff;
   --white: #fff;
@@ -52,6 +54,8 @@ html,
 .filters-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
   margin: 1rem 0;
   background: var(--white);
@@ -153,7 +157,6 @@ html,
 .card-content h3 {
   margin: 0;
   font-size: 1.2rem;
-  color: var(--primary-color);
 }
 .card-content h4 {
   margin: 0.5rem 0;
@@ -256,6 +259,7 @@ html,
   text-align: center;
   padding: 1rem 0;
   font-size: 0.9rem;
+  margin: 2rem 0 0 ;
 }
 
 .register-button {
