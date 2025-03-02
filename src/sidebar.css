@@ -1,0 +1,159 @@
+/* Sidebar Container - Adds Box Around Sidebar */
+.sidebar-container {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 12px; /* Smooth rounded edges */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border: 1px solid #ddd;
+    max-width: 320px; /* Slightly wider */
+    margin: 1rem;
+}
+
+/* Sidebar Header */
+.sidebar-container h5 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Sidebar Section Titles */
+.sidebar-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e0e0e0; /* Subtle section separator */
+}
+
+.sidebar-section:last-child {
+    border-bottom: none;
+}
+
+.sidebar-section strong {
+    display: block;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+/* Sidebar Lists */
+.sidebar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-list-item {
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #f9f9f9;
+    margin-bottom: 5px;
+}
+
+.sidebar-list-item:hover {
+    background: #e9ecef;
+    transform: scale(1.03);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress Bar - Increased Size */
+.progress-container {
+    position: relative;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.progress {
+    height: 35px !important;
+    background-color: #e9ecef;
+    border-radius: 10px; /* Smoother edges */
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px !important;
+}
+
+/* In-Progress Courses Overlay */
+.in-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: orange !important;
+    opacity: 0.7;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Completed Courses Bar */
+.completed-bar {
+    height: 100%;
+    position: relative;
+    background-color: var(--primary-color) !important;
+    text-align: center;
+    line-height: 50px; /* Adjusted for new height */
+    color: white;
+    font-weight: bold;
+    transition: width 0.3s ease-in-out;
+    z-index: 1;
+    min-width: 30px;
+}
+
+/* Percentage Text Inside Bar - Bigger & More Readable */
+.inside-bar-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 50px; /* Adjusted for new height */
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+/* Tooltip for Progress Bar */
+.progress-bar-tooltip {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
+
+.progress-bar-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -40px; /* Moved slightly higher */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+.progress-bar-tooltip:hover::after {
+    opacity: 1;
+}
+
+/* Hover Effect for Sidebar Courses */
+.course-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 6px;
+    padding: 10px;
+    background: white;
+    cursor: pointer;
+}
+
+.course-hover:hover {
+    transform: scale(1.05); /* Slight pop-up effect */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: #f8f9fa;
+}
