@@ -16,24 +16,18 @@ function App() {
 
   const [favorites, setFavorites] = useState([]);
   const [showCore, setShowCore] = useState(false);
-  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
+  const [sortOrder, setSortOrder] = useState('asc');
   const [showFavorites, setShowFavorites] = useState(false);
 
-  const [completedCourses, setCompletedCourses] = useState([
-    'CS 111', 'CS 224', 'CS 235'
-  ]);
-  const [plannedCourses, setPlannedCourses] = useState([
-    'CS 236', 'CS 312'
-  ]);
+  const [completedCourses, setCompletedCourses] = useState(['CS 111', 'CS 224', 'CS 235']);
+  const [plannedCourses, setPlannedCourses] = useState(['CS 236', 'CS 312']);
   const totalCreditsRequired = 74;
   const creditsPerCourse = 3;
   const earnedCredits = completedCourses.length * creditsPerCourse;
-
   const currentCompletionPercent = Math.min(
-    Math.round((earnedCredits / totalCreditsRequired) * 100), // Ensure it's a percentage
-    100 // Prevent going over 100%
+    Math.round((earnedCredits / totalCreditsRequired) * 100),
+    100
   );
-
 
   const resetFilters = () => {
     setSearchTerm('');
@@ -62,7 +56,16 @@ function App() {
       const coreMatch = !showCore || course.isCore;
       const registeredMatch = !showRegistered || registeredCourses.has(course.id);
       const completedMatch = !showCompleted || completedCourses.includes(course.header);
-      return levelMatch && creditMatch && semesterMatch && searchMatch && favoritesMatch && coreMatch && registeredMatch && completedMatch;
+      return (
+        levelMatch &&
+        creditMatch &&
+        semesterMatch &&
+        searchMatch &&
+        favoritesMatch &&
+        coreMatch &&
+        registeredMatch &&
+        completedMatch
+      );
     })
     .sort((a, b) => {
       const levelA = parseInt(a.header.match(/\d+/)[0]);
@@ -112,114 +115,11 @@ function App() {
           <p></p>
         </div>
       </header>
-  
-      {/* Wrap main content + sidebar in a fluid container and row */}
+
       <div className="container-fluid">
         <div className="row">
-          {/* MAIN CONTENT (left side) */}
+          {/* Courses Section (Left Column) */}
           <div className="col-md-9">
-            {/* Filters Bar */}
-            <div className="filters-container container">
-              <div className="filter-item">
-                <input
-                  type="text"
-                  placeholder="Search courses..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                {searchTerm && (
-                  <button className="clear-button" onClick={() => setSearchTerm('')}>
-                    ×
-                  </button>
-                )}
-              </div>
-              <div className="filter-item">
-                <select value={sortOrder} onChange={handleSortOrderChange}>
-                  <option value="asc">Ascending</option>
-                  <option value="desc">Descending</option>
-                </select>
-              </div>
-              <div className="filter-item">
-                <select value={courseLevel} onChange={(e) => setCourseLevel(e.target.value)}>
-                  <option>All Levels</option>
-                  <option value="100">100 Level</option>
-                  <option value="200">200 Level</option>
-                  <option value="300">300 Level</option>
-                  <option value="400">400 Level</option>
-                </select>
-              </div>
-              <div className="filter-item">
-                <select value={creditHours} onChange={(e) => setCreditHours(e.target.value)}>
-                  <option>All Credits</option>
-                  {[...new Set(coursesData.map((c) => c.credits))]
-                    .sort()
-                    .map((credit) => (
-                      <option key={credit} value={credit}>
-                        {credit} credit{credit !== 1 ? 's' : ''}
-                      </option>
-                    ))}
-                </select>
-              </div>
-              <div className="filter-item">
-                <select value={semester} onChange={(e) => setSemester(e.target.value)}>
-                  <option>All Semesters</option>
-                  <option value="F">Fall</option>
-                  <option value="W">Winter</option>
-                  <option value="SP">Spring</option>
-                  <option value="SU">Summer</option>
-                </select>
-              </div>
-              <div className="filter-item checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={showFavorites}
-                    onChange={() => setShowFavorites((prev) => !prev)}
-                  />
-                  Favorites
-                </label>
-              </div>
-              <div className="filter-item checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={showCore}
-                    onChange={() => setShowCore((prev) => !prev)}
-                  />
-                  Core Classes
-                </label>
-              </div>
-              <div className="filter-item checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={showRegistered}
-                    onChange={() => setShowRegistered((prev) => !prev)}
-                  />
-                  Registered Courses
-                </label>
-              </div>
-
-              <div className="filter-item checkbox">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={showCompleted}
-                    onChange={() => setShowCompleted((prev) => !prev)}
-                  />
-                  Completed Courses
-                </label>
-              </div>
-              <div className="filter-item">
-                <button className="reset-button" onClick={resetFilters}>
-                  Reset
-                </button>
-              </div>
-            </div>
-            
-          
-  
-            {/* Courses Section */}
             <main className="container">
               <div className="pagination top-pagination">
                 <button
@@ -238,7 +138,7 @@ function App() {
                   Next
                 </button>
               </div>
-  
+
               <div className="courses-grid">
                 {showFavorites && favorites.length === 0 ? (
                   <div className="no-favorites">No favorites selected</div>
@@ -273,7 +173,7 @@ function App() {
                   ))
                 )}
               </div>
-  
+
               <div className="pagination bottom-pagination">
                 <button
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
@@ -293,19 +193,118 @@ function App() {
               </div>
             </main>
           </div>
-  
-          {/* SIDEBAR (right side) */}
+
+          {/* Right Column: Filters + Sidebar */}
           <div className="col-md-3">
-            {/* Pass whatever props you need to the Sidebar */}
-            <Sidebar
-              completedCourses={completedCourses}
-              registeredCourses={registeredCourses}
-              plannedCourses={plannedCourses}
-              totalCreditsRequired={totalCreditsRequired}
-              currentCompletionPercent={currentCompletionPercent} // Now dynamic!
-              openModal={openModal}
-              coursesData={coursesData} 
-            />
+            <div className="right-sidebar">
+              <div className="filters-container right-filters">
+                <div className="filter-item">
+                  <input
+                    type="text"
+                    placeholder="Search courses..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  {searchTerm && (
+                    <button className="clear-button" onClick={() => setSearchTerm('')}>
+                      ×
+                    </button>
+                  )}
+                </div>
+                <div className="filter-item">
+                  <select value={sortOrder} onChange={handleSortOrderChange}>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                  </select>
+                </div>
+                <div className="filter-item">
+                  <select value={courseLevel} onChange={(e) => setCourseLevel(e.target.value)}>
+                    <option>All Levels</option>
+                    <option value="100">100 Level</option>
+                    <option value="200">200 Level</option>
+                    <option value="300">300 Level</option>
+                    <option value="400">400 Level</option>
+                  </select>
+                </div>
+                <div className="filter-item">
+                  <select value={creditHours} onChange={(e) => setCreditHours(e.target.value)}>
+                    <option>All Credits</option>
+                    {[...new Set(coursesData.map((c) => c.credits))]
+                      .sort()
+                      .map((credit) => (
+                        <option key={credit} value={credit}>
+                          {credit} credit{credit !== 1 ? 's' : ''}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+                <div className="filter-item">
+                  <select value={semester} onChange={(e) => setSemester(e.target.value)}>
+                    <option>All Semesters</option>
+                    <option value="F">Fall</option>
+                    <option value="W">Winter</option>
+                    <option value="SP">Spring</option>
+                    <option value="SU">Summer</option>
+                  </select>
+                </div>
+                <div className="filter-item checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={showFavorites}
+                      onChange={() => setShowFavorites((prev) => !prev)}
+                    />
+                    Favorites
+                  </label>
+                </div>
+                <div className="filter-item checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={showCore}
+                      onChange={() => setShowCore((prev) => !prev)}
+                    />
+                    Core Classes
+                  </label>
+                </div>
+                <div className="filter-item checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={showRegistered}
+                      onChange={() => setShowRegistered((prev) => !prev)}
+                    />
+                    Registered Courses
+                  </label>
+                </div>
+                <div className="filter-item checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={showCompleted}
+                      onChange={() => setShowCompleted((prev) => !prev)}
+                    />
+                    Completed Courses
+                  </label>
+                </div>
+                <div className="filter-item">
+                  <button className="reset-button" onClick={resetFilters}>
+                    Reset
+                  </button>
+                </div>
+              </div>
+  
+              {/* Sidebar component appears below the filters */}
+              <Sidebar
+                completedCourses={completedCourses}
+                registeredCourses={registeredCourses}
+                plannedCourses={plannedCourses}
+                totalCreditsRequired={totalCreditsRequired}
+                currentCompletionPercent={currentCompletionPercent}
+                openModal={openModal}
+                coursesData={coursesData}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -380,7 +379,6 @@ function App() {
       )}
     </div>
   );
-  
 }
 
 export default App;
