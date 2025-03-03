@@ -7,6 +7,9 @@
   --header-bg: linear-gradient(135deg, #3a86ff, #384dec);
 }
 
+.courses-grid {
+  margin-top: 20px; /* Adjust the value as needed */
+}
 * {
   box-sizing: border-box;
 }

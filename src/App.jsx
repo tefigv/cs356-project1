@@ -110,7 +110,7 @@ function App() {
   return (
     <div className="app">
       <header className="site-header">
-        <div className="container">
+        <div className="container" style={{ textAlign: 'left' }}>
           <h1>BYU CS Courses</h1>
           <p></p>
         </div>
@@ -121,24 +121,7 @@ function App() {
           {/* Courses Section (Left Column) */}
           <div className="col-md-9">
             <main className="container">
-              <div className="pagination top-pagination">
-                <button
-                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </button>
-                <span>
-                  Page {currentPage} of {totalPages}
-                </span>
-                <button
-                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </button>
-              </div>
-
+              {/* Removed the top pagination block */}
               <div className="courses-grid">
                 {showFavorites && favorites.length === 0 ? (
                   <div className="no-favorites">No favorites selected</div>
