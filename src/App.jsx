@@ -203,10 +203,10 @@ function App() {
                     type="text"
                     placeholder="Search courses..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                   />
                   {searchTerm && (
-                    <button className="clear-button" onClick={() => setSearchTerm('')}>
+                    <button className="clear-button" onClick={() => { setSearchTerm(''); setCurrentPage(1); }}>
                       ×
                     </button>
                   )}
@@ -218,7 +218,7 @@ function App() {
                   </select>
                 </div>
                 <div className="filter-item">
-                  <select value={courseLevel} onChange={(e) => setCourseLevel(e.target.value)}>
+                  <select value={courseLevel} onChange={(e) => { setCourseLevel(e.target.value); setCurrentPage(1); }}>
                     <option>All Levels</option>
                     <option value="100">100 Level</option>
                     <option value="200">200 Level</option>
@@ -227,7 +227,7 @@ function App() {
                   </select>
                 </div>
                 <div className="filter-item">
-                  <select value={creditHours} onChange={(e) => setCreditHours(e.target.value)}>
+                  <select value={creditHours} onChange={(e) => { setCreditHours(e.target.value); setCurrentPage(1); }}>
                     <option>All Credits</option>
                     {[...new Set(coursesData.map((c) => c.credits))]
                       .sort()
@@ -239,7 +239,7 @@ function App() {
                   </select>
                 </div>
                 <div className="filter-item">
-                  <select value={semester} onChange={(e) => setSemester(e.target.value)}>
+                  <select value={semester} onChange={(e) => { setSemester(e.target.value); setCurrentPage(1); }}>
                     <option>All Semesters</option>
                     <option value="F">Fall</option>
                     <option value="W">Winter</option>
@@ -252,7 +252,7 @@ function App() {
                     <input
                       type="checkbox"
                       checked={showFavorites}
-                      onChange={() => setShowFavorites((prev) => !prev)}
+                      onChange={() => { setShowFavorites(prev => !prev); setCurrentPage(1); }}
                     />
                     Favorites
                   </label>
@@ -262,7 +262,7 @@ function App() {
                     <input
                       type="checkbox"
                       checked={showCore}
-                      onChange={() => setShowCore((prev) => !prev)}
+                      onChange={() => { setShowCore(prev => !prev); setCurrentPage(1); }}
                     />
                     Core Classes
                   </label>
@@ -272,7 +272,7 @@ function App() {
                     <input
                       type="checkbox"
                       checked={showRegistered}
-                      onChange={() => setShowRegistered((prev) => !prev)}
+                      onChange={() => { setShowRegistered(prev => !prev); setCurrentPage(1); }}
                     />
                     Registered Courses
                   </label>
@@ -282,7 +282,7 @@ function App() {
                     <input
                       type="checkbox"
                       checked={showCompleted}
-                      onChange={() => setShowCompleted((prev) => !prev)}
+                      onChange={() => { setShowCompleted(prev => !prev); setCurrentPage(1); }}
                     />
                     Completed Courses
                   </label>
@@ -293,7 +293,7 @@ function App() {
                   </button>
                 </div>
               </div>
-  
+
               {/* Sidebar component appears below the filters */}
               <Sidebar
                 completedCourses={completedCourses}
@@ -308,14 +308,14 @@ function App() {
           </div>
         </div>
       </div>
-  
+
       <footer className="site-footer">
         <div className="container">
           <p>&copy; 2025 BYU CS Courses. All rights reserved.</p>
           <p>Contact: webmaster@byu.edu | Provo, UT 84602</p>
         </div>
       </footer>
-  
+
       {modalCourse && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -350,8 +350,7 @@ function App() {
               )}
               {modalCourse.deliveryMethod && (
                 <p>
-                  <strong>Delivery Method:</strong>{' '}
-                  {modalCourse.deliveryMethod.join(', ')}
+                  <strong>Delivery Method:</strong> {modalCourse.deliveryMethod.join(', ')}
                 </p>
               )}
               <p>
