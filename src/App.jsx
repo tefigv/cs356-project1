@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import coursesData from './courseData';
+import Sidebar from './Sidebar';
+
 
 function App() {
   const [modalCourse, setModalCourse] = useState(null);
@@ -11,9 +13,21 @@ function App() {
   const [semester, setSemester] = useState('All Semesters');
   const [requirement, setRequirement] = useState('All Requirements');
   const coursesPerPage = 10;
+  const [showRegistered, setShowRegistered] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   const [showCore, setShowCore] = useState(false);
   const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
+
+  const [completedCourses, setCompletedCourses] = useState(['CS 111', 'CS 224', 'CS 235']);
+  const [plannedCourses, setPlannedCourses] = useState(['CS 236', 'CS 312']);
+  const totalCreditsRequired = 74;
+  const creditsPerCourse = 3;
+  const earnedCredits = completedCourses.length * creditsPerCourse;
+  const currentCompletionPercent = Math.min(
+    Math.round((earnedCredits / totalCreditsRequired) * 100),
+    100
+  );
 
   const resetFilters = () => {
     setSearchTerm('');
@@ -39,9 +53,12 @@ function App() {
         course.header.toLowerCase().includes(searchTerm.toLowerCase()) ||
         course.title.toLowerCase().includes(searchTerm.toLowerCase());
       const coreMatch = !showCore || course.isCore;
+      const registeredMatch = !showRegistered || registeredCourses.has(course.id);
+      const completedMatch = !showCompleted || completedCourses.includes(course.header);
+
       const requirementMatch = requirement === 'All Requirements' || course.requirement.includes(requirement);
 
-      return levelMatch && creditMatch && semesterMatch && searchMatch && coreMatch && requirementMatch;
+      return levelMatch && creditMatch && semesterMatch && searchMatch && coreMatch && registeredMatch && completedMatch && requirementMatch;
     })
     .sort((a, b) => {
       const levelA = parseInt(a.header.match(/\d+/)[0]);
@@ -68,11 +85,6 @@ function App() {
     });
   };
 
-  const handleSortOrderChange = (e) => {
-    setSortOrder(e.target.value);
-    setCurrentPage(1);
-  };
-
   const requirements = [
     { id: 'requirement1', label: 'Requirement 1 - Complete 17 Courses' },
     { id: 'requirement2', label: 'Requirement 2 - Complete 4 Courses' },
@@ -81,7 +93,6 @@ function App() {
     { id: 'requirement5', label: 'Requirement 5 - Complete 2 of 11 Courses' },
     { id: 'requirement6', label: 'Requirement 6 - Complete 1 of 38 Courses' },
   ];
-
   return (
     <div className="app">
       <header className="site-header">
@@ -92,100 +103,138 @@ function App() {
         </div>
       </header>
 
-      {/* Filters Bar */}
-      <div className="filters-container container">
-        <div className="filter-item">
-          <input
-            type="text"
-            placeholder="Search courses..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          {searchTerm && (
-            <button className="clear-button" onClick={() => setSearchTerm('')}>
-              ×
-            </button>
-          )}
-        </div>
-        <div className="filter-item">
-          <select value={requirement} onChange={(e) => setRequirement(e.target.value)}>
-            <option value="All Requirements">All Requirements</option>
-            {requirements.map((req) => (
-              <option key={req.id} value={req.id}>{req.label}</option>
-            ))}
-          </select>
-        </div>
-        <div className="filter-item">
-          <select value={courseLevel} onChange={(e) => setCourseLevel(e.target.value)}>
-            <option>All Levels</option>
-            <option value="100">100 Level</option>
-            <option value="200">200 Level</option>
-            <option value="300">300 Level</option>
-            <option value="400">400 Level</option>
-          </select>
-        </div>
-        <div className="filter-item">
-          <select value={creditHours} onChange={(e) => setCreditHours(e.target.value)}>
-            <option>All Credits</option>
-            {[...new Set(coursesData.map((c) => c.credits))]
-              .sort()
-              .map((credit) => (
-                <option key={credit} value={credit}>
-                  {credit} credit{credit !== 1 ? 's' : ''}
-                </option>
-              ))}
-          </select>
-        </div>
-        <div className="filter-item">
-          <select value={semester} onChange={(e) => setSemester(e.target.value)}>
-            <option>All Semesters</option>
-            <option value="F">Fall</option>
-            <option value="W">Winter</option>
-            <option value="SP">Spring</option>
-            <option value="SU">Summer</option>
-          </select>
-        </div>
-        <div className="filter-item checkbox">
-        </div>
-        <div className="filter-item checkbox">
-          <label>
-            <input
-              type="checkbox"
-              checked={showCore}
-              onChange={() => setShowCore((prev) => !prev)}
-            />
-            Core Classes
-          </label>
-        </div>
-        <div className="filter-item">
-          <button className="reset-button" onClick={resetFilters}>
-            Reset
-          </button>
-        </div>
-      </div>
-
-      {/* Requirement Courses Sections */}
-{requirements
-  .filter(req => requirement === 'All Requirements' || req.id === requirement)
-  .map((req) => {
-    const requirementCourses = filteredCourses.filter(course => course.requirement && course.requirement.includes(req.id));
-    return (
-      <div className="container mt-4" key={req.id}>
-        <h3>{req.label}</h3>
-        <div className="list-group">
-          {requirementCourses.map((course) => (
-            <div
-              className="list-group-item list-group-item-action"
-              key={course.id}
-              // onClick={() => openModal(course)}
-            >
-              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse-${course.id}`} aria-expanded="false" aria-controls={`flush-collapse-${course.id}`}>
+      <div className="container m-4">
+      <div className="row">
+        {/* Right Column: Filters + Sidebar */}
+        <div className="col-md-3 align-self-start">
+          <div className="right-sidebar">
+            <div className="filters-container right-filters">
+              <div className="filter-item">
+                <input
+                  type="text"
+                  placeholder="Search courses..."
+                  value={searchTerm}
+                  onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
+                />
+                {searchTerm && (
+                  <button className="clear-button" onClick={() => { setSearchTerm(''); setCurrentPage(1); }}>
+                    ×
+                  </button>
+                )}
+                </div>
+                <div className="filter-item">
+                  <select value={requirement} onChange={(e) => setRequirement(e.target.value)}>
+                    <option value="All Requirements">All Requirements</option>
+                    {requirements.map((req) => (
+                    <option key={req.id} value={req.id}>{req.label}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="filter-item">
+                  <select value={courseLevel} onChange={(e) => { setCourseLevel(e.target.value); setCurrentPage(1); }}>
+                    <option>All Levels</option>
+                    <option value="100">100 Level</option>
+                    <option value="200">200 Level</option>
+                    <option value="300">300 Level</option>
+                    <option value="400">400 Level</option>
+                  </select>
+                </div>
+                <div className="filter-item">
+                  <select value={creditHours} onChange={(e) => { setCreditHours(e.target.value); setCurrentPage(1); }}>
+                    <option>All Credits</option>
+                    {[...new Set(coursesData.map((c) => c.credits))]
+                      .sort()
+                      .map((credit) => (
+                        <option key={credit} value={credit}>
+                          {credit} credit{credit !== 1 ? 's' : ''}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+                <div className="filter-item">
+                  <select value={semester} onChange={(e) => { setSemester(e.target.value); setCurrentPage(1); }}>
+                    <option>All Semesters</option>
+                    <option value="F">Fall</option>
+                    <option value="W">Winter</option>
+                    <option value="SP">Spring</option>
+                    <option value="SU">Summer</option>
+                  </select>
+                </div>
+                <div className="filter-item checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={showCore}
+                      onChange={() => { setShowCore(prev => !prev); setCurrentPage(1); }}
+                    />
+                    Core Classes
+                  </label>
+                </div>
+                <div className="filter-item checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={showRegistered}
+                      onChange={() => { setShowRegistered(prev => !prev); setCurrentPage(1); }}
+                    />
+                    Registered Courses
+                  </label>
+                </div>
+                <div className="filter-item checkbox">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={showCompleted}
+                      onChange={() => { setShowCompleted(prev => !prev); setCurrentPage(1); }}
+                    />
+                    Completed Courses
+                  </label>
+                </div>
+                <div className="filter-item">
+                  <button className="reset-button" onClick={resetFilters}>
+                    Reset
+                  </button>
+                </div>
+              </div>
+              {/* Sidebar component appears below the filters */}
+              <Sidebar
+                completedCourses={completedCourses}
+                registeredCourses={registeredCourses}
+                plannedCourses={plannedCourses}
+                totalCreditsRequired={totalCreditsRequired}
+                currentCompletionPercent={currentCompletionPercent}
+                openModal={openModal}
+                coursesData={coursesData}
+              />
+              </div>
+            </div>
+         {/* Requirement Courses Sections */}   
+         <div className="col-md-9">
+         <div className="row justify-content-end">
+        {requirements
+        .filter(req => requirement === 'All Requirements' || req.id === requirement)
+        .map((req) => {
+          const requirementCourses = filteredCourses.filter(course => course.requirement && course.requirement.includes(req.id));
+          if (requirementCourses.length === 0) {
+            return null; // Skip rendering this requirement section if no courses match
+          }
+          return (
+            <div className="col-md-10 mb-4" key={req.id}>
+            <h3>{req.label}</h3>
+            <div className="list-group" id={`accordion-${req.id}`}>
+              {requirementCourses.map((course) => (
+                <div
+                  className="list-group-item list-group-item-action"
+                  key={course.id}
+                  // onClick={() => openModal(course)}
+                >
+              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse-${course.id}`} aria-expanded="false" aria-controls={`flush-collapse-${course.id}`} data-bs-parent={`#accordion-${req.id}`}>
                 <div className="d-flex w-100 justify-content-between">
                   <h5 className="mb-1">{course.header} - {course.title}</h5>
                   <small>{course.credits} credits</small>
                 </div>
               </button>
-              <div id={`flush-collapse-${course.id}`} className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div id={`flush-collapse-${course.id}`} className="accordion-collapse collapse" data-bs-parent={`#accordion-${req.id}`}>
             <p className="modal-description">{course.description}</p>
             <div className="modal-details">
               <p>
@@ -236,6 +285,13 @@ function App() {
       </div>
     );
   })}
+  
+  </div>
+  </div>
+  </div>
+  </div>
+
+       
 
         {/* <div className="courses-grid">
           {
