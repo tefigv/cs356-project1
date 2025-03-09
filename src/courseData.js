@@ -9,7 +9,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": [], // No prerequisites
     "skills": ["Problem-solving", "Basic programming concepts"],
-    "deliveryMethod": ["In-person", "Online"]
+    "deliveryMethod": ["In-person", "Online"],
+    "requirement": ["requirement1"]
   },
   {
     "id": "cs180",
@@ -21,8 +22,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": [],
     "skills": ["Statistics", "Linear algebra", "Machine learning", "Data cleaning", "Data visualization"],
-    "deliveryMethod": ["In-person"]
-
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs202",
@@ -34,7 +35,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": [],
     "skills": ["Hands-on software engineering experience"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs203",
@@ -46,7 +48,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 202"],
     "skills": ["Advanced software engineering practices"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs204",
@@ -58,7 +61,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 203"],
     "skills": ["Advanced software engineering practices"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs224",
@@ -70,7 +74,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": ["CS 111"],
     "skills": ["Low-level data representation", "Instruction processing"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs235",
@@ -82,7 +87,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": ["CS 111"],
     "skills": ["Data structures", "Algorithms", "Basic algorithm analysis"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs236",
@@ -94,7 +100,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": ["CS 111"],
     "skills": ["Grammars", "Parsing", "Predicate and propositional logic", "Proof techniques"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs312",
@@ -106,7 +113,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": ["CS 235", "CS 236"],
     "skills": ["Advanced algorithm analysis", "Design techniques", "Graph algorithms"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs324",
@@ -118,7 +126,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": ["CS 224"],
     "skills": ["Operating systems", "Concurrent programming", "Process management"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs340",
@@ -130,7 +139,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": ["CS 235"],
     "skills": ["Software development methodologies", "Object-oriented design patterns", "Testing strategies"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs330",
@@ -142,7 +152,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 236"],
     "skills": ["Programming language paradigms", "Syntax and semantics", "Type systems", "Functional programming"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs345",
@@ -154,7 +165,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 324"],
     "skills": ["Process management", "Memory allocation", "File systems"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs355",
@@ -166,7 +178,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 235"],
     "skills": ["2D graphics programming", "User interface design", "Event handling"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs450",
@@ -178,7 +191,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 355"],
     "skills": ["3D graphics", "Rendering", "Geometric modeling"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs465",
@@ -190,7 +204,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 324"],
     "skills": ["Cryptography", "Network security", "Authentication"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs470",
@@ -202,7 +217,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 111"],
     "skills": ["HTML", "CSS", "JavaScript", "Server-side programming"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5"]
   },
   {
     "id": "cs260",
@@ -214,7 +230,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 111"],
     "skills": ["HTML", "CSS", "JavaScript", "Server-side programming"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs356",
@@ -226,7 +243,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 235"],
     "skills": ["Mobile app design and development for iOS and Android"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs401",
@@ -238,7 +256,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": [],
     "skills": ["Ethical issues in computing", "Privacy", "Intellectual property"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs452",
@@ -250,7 +269,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 235"],
     "skills": ["Relational database design", "SQL", "Database management systems"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs460",
@@ -262,7 +282,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 324"],
     "skills": ["Network protocols", "Architecture", "Security"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs472",
@@ -274,7 +295,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 312"],
     "skills": ["Supervised and unsupervised learning algorithms", "Neural networks"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs480",
@@ -286,7 +308,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 340"],
     "skills": ["Large-scale software development", "Project management"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs486_1",
@@ -298,7 +321,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 340"],
     "skills": ["Software testing techniques", "Test-driven development"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs490r",
@@ -310,7 +334,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["Varies by topic"],
     "skills": ["Advanced topics in computer science"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs494",
@@ -322,7 +347,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": ["Senior standing"],
     "skills": ["Project planning and design"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs495",
@@ -334,7 +360,8 @@ const coursesData = [
     "isCore": true,
     "prerequisites": ["CS 494"],
     "skills": ["Project implementation and presentation"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
   },
   {
     "id": "cs240",
@@ -346,7 +373,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 235"],
     "skills": ["Object-oriented programming", "Design patterns"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement5,requirement6"]
   },
   {
     "id": "cs252",
@@ -358,7 +386,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 236"],
     "skills": ["Formal languages", "Automata theory", "Computability"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
 
   },
   {
@@ -371,7 +400,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 236"],
     "skills": ["Formal languages", "Automata theory", "Computability"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs360",
@@ -383,7 +413,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 260"],
     "skills": ["Client-server architecture", "RESTful APIs", "Full-stack web development"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs405",
@@ -395,7 +426,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": [],
     "skills": ["Entrepreneurship in software", "Business models", "Startup strategies"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs412",
@@ -407,7 +439,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 324"],
     "skills": ["Distributed computing principles", "Scalability", "Fault tolerance"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs428",
@@ -419,7 +452,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 340"],
     "skills": ["Software development processes", "Requirements engineering", "Project management"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs431",
@@ -431,7 +465,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 312"],
     "skills": ["Knowledge representation", "Reasoning", "Machine learning techniques"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs455",
@@ -443,7 +478,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 355"],
     "skills": ["3D modeling", "Rendering", "Animation techniques"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs462",
@@ -455,7 +491,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 412"],
     "skills": ["Scalable system design", "Cloud computing", "Parallel processing"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs474",
@@ -467,7 +504,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 472"],
     "skills": ["Neural network architectures", "Training techniques", "Deep learning applications"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs478",
@@ -479,7 +517,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 312"],
     "skills": ["Data preprocessing", "Association rules", "Clustering", "Classification techniques"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs484",
@@ -491,7 +530,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 324"],
     "skills": ["Parallel algorithms", "Parallel architectures", "High-performance computing"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs486_2",
@@ -503,7 +543,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 340"],
     "skills": ["Software testing techniques", "Test-driven development", "Formal verification"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs493r",
@@ -515,7 +556,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": [],
     "skills": ["Applying CS to non-profit work", "Humanitarian computing solutions"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs497r",
@@ -527,7 +569,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["Instructor permission"],
     "skills": ["Research methodologies", "Experimentation", "Technical writing"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs498r",
@@ -539,7 +582,8 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["Instructor permission"],
     "skills": ["Teaching assistance", "Grading", "Mentorship"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
   {
     "id": "cs501",
@@ -551,8 +595,139 @@ const coursesData = [
     "isCore": false,
     "prerequisites": ["CS 312"],
     "skills": ["Advanced algorithmic techniques", "Computational complexity", "Algorithm analysis"],
-    "deliveryMethod": ["In-person"]
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement6"]
   },
+  {
+    "id": "math112",
+    "header": "MATH 112",
+    "title": "Calculus 1",
+    "description": "Introduction to differential and integral calculus of one variable.",
+    "credits": 4,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["MATH 111"],
+    "skills": ["Differential calculus", "Integral calculus"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
+  },
+  {
+    "id": "math113",
+    "header": "MATH 113",
+    "title": "Calculus 2",
+    "description": "Continuation of Calculus 1, including techniques of integration, series, and polar coordinates.",
+    "credits": 4,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["MATH 112"],
+    "skills": ["Techniques of integration", "Series", "Polar coordinates"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement1"]
+  },
+  {
+    "id": "math214",
+    "header": "MATH 214",
+    "title": "Linear Algebra",
+    "description": "Matrix theory, vector spaces, linear transformations, and eigenvalues.",
+    "credits": 3,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["MATH 113"],
+    "skills": ["Matrix theory", "Vector spaces", "Linear transformations"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement2"]
+  },
+  {
+    "id": "math215",
+    "header": "MATH 215",
+    "title": "Multivariable Calculus",
+    "description": "Calculus of functions of several variables, including partial derivatives and multiple integrals.",
+    "credits": 4,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["MATH 113"],
+    "skills": ["Partial derivatives", "Multiple integrals"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement2"]
+  },
+  {
+    "id": "math302",
+    "header": "MATH 302",
+    "title": "Differential Equations",
+    "description": "Introduction to ordinary differential equations and their applications.",
+    "credits": 3,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["MATH 215"],
+    "skills": ["Ordinary differential equations", "Applications of differential equations"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement4"]
+  },
+  {
+    "id": "phys121",
+    "header": "PHYS 121",
+    "title": "Physics 1",
+    "description": "Mechanics, heat, and sound.",
+    "credits": 4,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["MATH 112"],
+    "skills": ["Mechanics", "Heat", "Sound"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement2"]
+  },
+  {
+    "id": "stat121",
+    "header": "STAT 121",
+    "title": "Principles of Statistics",
+    "description": "Introduction to statistical methods and data analysis.",
+    "credits": 3,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["MATH 112"],
+    "skills": ["Statistical methods", "Data analysis"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement3"]
+  },
+  {
+    "id": "stat201",
+    "header": "STAT 201",
+    "title": "Intermediate Statistics",
+    "description": "Continuation of introductory statistics, including hypothesis testing and regression analysis.",
+    "credits": 3,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["STAT 121"],
+    "skills": ["Hypothesis testing", "Regression analysis"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement3"]
+  },
+  {
+    "id": "stat330",
+    "header": "STAT 330",
+    "title": "Applied Statistics",
+    "description": "Application of statistical methods to real-world problems.",
+    "credits": 3,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": ["STAT 201"],
+    "skills": ["Statistical methods", "Real-world applications"],
+    "deliveryMethod": ["In-person"],
+    "requirement" : ["requirement4"]
+  },
+  {
+    "id": "wrtg316",
+    "header": "WRTG 316",
+    "title": "Technical Communication",
+    "description": "Focuses on the principles and practices of effective technical communication, including writing, editing, and presenting technical information.",
+    "credits": 3,
+    "semesters": ["F", "W", "SP", "SU"],
+    "isCore": false,
+    "prerequisites": [],
+    "skills": ["Technical writing", "Editing", "Presenting technical information"],
+    "deliveryMethod": ["In-person", "Online"],
+    "requirement" : ["requirement2"]
+  }
 ];
 
 export default coursesData;

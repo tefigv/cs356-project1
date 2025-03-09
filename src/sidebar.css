@@ -5,8 +5,8 @@
     border-radius: 12px; /* Smooth rounded edges */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
     border: 1px solid #ddd;
-    max-width: 320px; /* Slightly wider */
-    margin: 1rem;
+    max-width: 320px; /*Slightly wider */
+    /* margin: 1rem; */
 }
 
 /* Sidebar Header */

@@ -1,22 +1,24 @@
 {
-  "name": "p1_group_website",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "vit": "^0.0.1",
-    "vite": "^6.1.0"
-  },
-  "dependencies": {
-    "bootstrap": "^5.3.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "name": "p1_group_website",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+      "dev": "vite",
+      "start": "react-router start"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "devDependencies": {
+      "autoprefixer": "^10.4.20",
+      "postcss": "^8.5.3",
+      "vit": "^0.0.1",
+      "vite": "^6.1.0"
+    },
+    "dependencies": {
+      "bootstrap": "^5.3.3",
+      "react": "^19.0.0",
+      "react-dom": "^19.0.0"
+    }
   }
-}

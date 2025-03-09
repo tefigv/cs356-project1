@@ -41,7 +41,7 @@ function Sidebar({
   const inProgressPercent = Math.min(Math.round(((earnedCredits + inProgressCredits) / totalCreditsRequired) * 100), 100);
 
   return (
-    <div className="bg-light border-left p-3 h-100">
+    <div className="bg-light border-left h-100">
       <div className="sidebar-container">
       <h5>My Plan</h5>
       <div className="mb-3">
