@@ -36,7 +36,7 @@ function Navigation() {
   
 
   const navbarStyle = {
-    backgroundColor: `rgba(34, 197, 94, ${bgAlpha})`,
+    backgroundColor: `rgba(92, 138, 72, ${bgAlpha})`, // Updated to #5C8A48
     backdropFilter: "blur(10px)",
     WebkitBackdropFilter: "blur(10px)"
   };
@@ -63,7 +63,7 @@ function Navigation() {
             <svg
               className="w-10 h-10"
               fill="none"
-              stroke="currentColor"
+              stroke="white"
               strokeWidth="2"
               viewBox="0 0 24 24"
             >
@@ -91,8 +91,8 @@ function Navigation() {
               <Link to="/donations" onClick={() => setMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Donations</Link>
               <Link to="/about" onClick={() => setMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">About</Link>
               <hr className="my-1" />
-              <button className="w-full text-left px-4 py-2 text-green-700 hover:bg-gray-100">Login</button>
-              <button className="w-full text-left px-4 py-2 bg-green-600 text-white hover:bg-green-700 rounded-b">Sign Up</button>
+              <button className="w-full text-left px-4 py-2 text-green-tree hover:bg-gray-100">Login</button>
+              <button className="w-full text-left px-4 py-2 bg-green-700 text-white hover:bg-green-700 rounded-b">Sign Up</button>
             </div>
           )}
         </div>
