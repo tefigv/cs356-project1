@@ -68,8 +68,8 @@ function AboutPage() {
             </div>
           </div>
 
-          <div id="our-mission" className="mb-4 scroll-mt-20">
-            <p className="text-base/7 font-bold whitespace-pre-wrap">Our Mission:</p>
+          <div id="our-mission" className="mb-4 scroll-mt-20 bg-green-700 text-white p-6 rounded-lg shadow-lg">
+            <p className="text-center font-bold text-xl whitespace-pre-wrap">Our Mission:</p>
             <p>
               EcoConnect helps people take action for the planet by connecting them with local projects, trusted organizations, and sustainability
               resources.
